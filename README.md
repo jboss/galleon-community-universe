@@ -1,0 +1,1 @@
+This project provides the Galleon universe for JBoss community projects.
