@@ -61,7 +61,7 @@
     <plugins>
       <plugin>
         <groupId>org.jboss.galleon</groupId>
-        <artifactId>galleon-maven-plugins</artifactId>
+        <artifactId>galleon-maven-plugin</artifactId>
         <version>${version.org.jboss.galleon}</version>
         <executions>
           <execution>
