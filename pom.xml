@@ -18,7 +18,7 @@
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -28,11 +28,11 @@
   </parent>
 
   <groupId>org.jboss.universe</groupId>
-  <artifactId>community-universe-parent</artifactId>
+  <artifactId>community-universe</artifactId>
   <version>1.0.0.Final</version>
   <packaging>pom</packaging>
 
-  <name>JBoss Community Universe Parent</name>
+  <name>JBoss Galleon Community Universe</name>
   <inceptionYear>2018</inceptionYear>
   <licenses>
     <license>
@@ -41,10 +41,6 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-
-  <modules>
-    <module>community-universe</module>
-  </modules>
 
   <properties>
     <!--
@@ -59,82 +55,46 @@
     -->
 
     <version.org.jboss.galleon>2.0.0.Alpha1-SNAPSHOT</version.org.jboss.galleon>
-    <version.org.apache.maven>3.3.1</version.org.apache.maven>
-    <version.org.apache.maven.plugin-tools>${version.plugin.plugin}</version.org.apache.maven.plugin-tools>
-    <version.org.apache.maven.plugins.maven-shade-plugin>3.1.0</version.org.apache.maven.plugins.maven-shade-plugin>
-    <version.plugin.plugin>3.5</version.plugin.plugin>
-
   </properties>
 
-  <dependencyManagement>
-    <dependencies>
-
-      <!-- Modules in this project -->
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>community-universe</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <!-- External Dependencies -->
-
-      <dependency>
-        <groupId>org.jboss.galleon</groupId>
-        <artifactId>galleon-core</artifactId>
-        <version>${version.org.jboss.galleon}</version>
-      </dependency>
-
-      <dependency>
+  <build>
+    <plugins>
+      <plugin>
         <groupId>org.jboss.galleon</groupId>
         <artifactId>galleon-maven-plugins</artifactId>
         <version>${version.org.jboss.galleon}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.jboss.galleon</groupId>
-        <artifactId>galleon-maven-universe</artifactId>
-        <version>${version.org.jboss.galleon}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.maven</groupId>
-        <artifactId>maven-core</artifactId>
-        <version>${version.org.apache.maven}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-model</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-model-builder</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-repository-metadata</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.maven</groupId>
-        <artifactId>maven-plugin-api</artifactId>
-        <version>${version.org.apache.maven}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.maven.plugin-tools</groupId>
-        <artifactId>maven-plugin-annotations</artifactId>
-        <version>${version.org.apache.maven.plugin-tools}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-artifact</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-
-    </dependencies>
-  </dependencyManagement>
+        <executions>
+          <execution>
+            <id>create-universe</id>
+            <goals>
+              <goal>create-universe</goal>
+            </goals>
+            <phase>prepare-package</phase>
+            <configuration>
+              <producers>
+                <producer>
+                  <name>wildfly-core</name>
+                  <groupId>org.jboss.universe.producer</groupId>
+                  <artifactId>wildfly-producers</artifactId>
+                  <version-range>[1.0,)</version-range>
+                </producer>
+                <producer>
+                  <name>wildfly-servlet</name>
+                  <groupId>org.jboss.universe.producer</groupId>
+                  <artifactId>wildfly-producers</artifactId>
+                  <version-range>[1.0,)</version-range>
+                </producer>
+                <producer>
+                  <name>wildfly</name>
+                  <groupId>org.jboss.universe.producer</groupId>
+                  <artifactId>wildfly-producers</artifactId>
+                  <version-range>[1.0,)</version-range>
+                </producer>
+              </producers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
