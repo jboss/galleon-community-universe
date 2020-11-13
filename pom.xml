@@ -120,6 +120,12 @@
                   <artifactId>wildfly-producers</artifactId>
                   <version-range>[1.0,)</version-range>
                 </producer>
+                <producer>
+                  <name>wildfly-preview</name>
+                  <groupId>org.jboss.universe.producer</groupId>
+                  <artifactId>wildfly-producers</artifactId>
+                  <version-range>[1.2,)</version-range>
+                </producer>
               </producers>
             </configuration>
           </execution>
