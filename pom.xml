@@ -115,6 +115,12 @@
                   <version-range>[1.0,)</version-range>
                 </producer>
                 <producer>
+                  <name>wildfly-ee</name>
+                  <groupId>org.jboss.universe.producer</groupId>
+                  <artifactId>wildfly-producers</artifactId>
+                  <version-range>[1.0,)</version-range>
+                </producer>
+                <producer>
                   <name>wildfly</name>
                   <groupId>org.jboss.universe.producer</groupId>
                   <artifactId>wildfly-producers</artifactId>
